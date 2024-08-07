@@ -1,38 +1,230 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f8f8;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* App Container */
 .App {
   text-align: center;
+  padding: 20px;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #d6fad2;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Floating Background */
+.App::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+  z-index: -1;
+  animation: float 6s ease-in-out infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+  100% { transform: translateY(0); }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Header */
+h1 {
+  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+
+/* Current Time */
+.current-time {
+  font-size: 1.5em;
+  margin: 20px 0; /* Ensure spacing below Namaz reminder */
+  padding: 10px;
+  background: #444444;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #f4f4f4;
+  display: block; /* Ensure block-level display */
+}
+
+/* Prayer Times */
+.prayer-times {
+  margin-bottom: 20px;
+}
+
+.prayer-times h2 {
+  font-size: 2em;
+  color: #333;
+  background: #fff;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+
+.prayer-times ul {
+  list-style: none;
+  padding: 0;
+}
+
+.prayer-times li {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.prayer-times li:hover {
+  background: #f0f0f0;
+}
+
+/* Notification */
+.notification {
+  background: #ff5722;
   color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.alarm-off-button {
+  background: #ffffff;
+  color: #ff5722;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.alarm-off-button:hover {
+  background: #ff5722;
+  color: #ffffff;
+}
+
+/* Controls */
+.controls {
+  margin-top: 20px;
+}
+
+.control-button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.control-button:hover {
+  background: #45a049;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: #1976d2;
+}
+
+/* Dark Mode Enhancements */
+.dark-mode .current-time, .dark-mode .prayer-times h2, .dark-mode .prayer-times li {
+  background: #646464;
+  color: #ffffff;
+}
+
+.dark-mode .notification {
+  background: #b71c1c;
+}
+
+.dark-mode .alarm-off-button {
+  background: #333;
+  color: #ff5722;
+}
+
+.dark-mode .control-button {
+  background: #388e3c;
+}
+
+.dark-mode .theme-toggle {
+  background: #0288d1;
+}
+
+.manual-times {
+  margin: 20px 0;
+}
+
+.manual-time-setting {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.manual-time-setting label {
+  margin-right: 20px;
+}
+
+.manual-time-setting input {
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actual-time {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.dark-mode h3, label {
+  color: #333;
 }
