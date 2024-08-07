@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -18,9 +18,13 @@ function App() {
     Isha: ""
   });
 
+  const audioRef = useRef(null);
+
   useEffect(() => {
     fetchPrayerTimes();
-    
+  }, []);
+
+  useEffect(() => {
     // Update current time every second
     const timeInterval = setInterval(() => {
       const now = new Date();
@@ -38,7 +42,7 @@ function App() {
     return () => {
       clearInterval(timeInterval);
     };
-  }, [prayerTimes, manualTimes, alarmEnabled]);
+  }, [manualTimes, alarmEnabled]);
 
   const fetchPrayerTimes = async () => {
     try {
@@ -76,21 +80,20 @@ function App() {
     }
   };
 
-  let audioInstance = null;
   const playAzan = () => {
-    if (audioInstance) {
-      audioInstance.pause();
-      audioInstance.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
-    audioInstance = new Audio("/azan1.mp3");
-    audioInstance.play();
+    audioRef.current = new Audio("/azan1.mp3");
+    audioRef.current.play();
     setNotification("It's time for " + currentPrayer);
   };
 
   const turnOffAlarm = () => {
-    if (audioInstance) {
-      audioInstance.pause();
-      audioInstance.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
     setAlarmActive(false);
     setNotification(null);
@@ -123,7 +126,7 @@ function App() {
     <div className="App">
       <h1>Namaz Reminder</h1>
       <div className="current-time">
-        <span>Current Time: {currentTime}</span>
+        <span>Time: {currentTime}</span>
       </div>
       <div className="prayer-times">
         <h2>Prayer Times</h2>
